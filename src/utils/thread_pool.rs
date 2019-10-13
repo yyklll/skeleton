@@ -20,7 +20,7 @@ impl ThreadPool for RayonThreadPool {
     let pool = rayon::ThreadPoolBuilder::new()
       .num_threads(threads as usize)
       .panic_handler(|_| {
-        eprintln!("panic catched");
+        error!("panic catched");
       })
       .build()
       .map_err(|e| Error::StringError(format!("{}", e)))?;

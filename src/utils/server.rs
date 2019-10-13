@@ -22,10 +22,10 @@ impl<E: Engine> Server<E> {
     let listener = TcpListener::bind(&addr)?;
     let server = listener
       .incoming()
-      .map_err(|e| eprintln!("IO error: {}", e))
+      .map_err(|e| error!("IO error: {}", e))
       .for_each(move |tcp| {
         let engine = self.engine.clone();
-        serve(engine, tcp).map_err(|e| eprintln!("Error on serving client: {}", e))
+        serve(engine, tcp).map_err(|e| error!("Error on serving client: {}", e))
       });
     tokio::run(server);
     Ok(())

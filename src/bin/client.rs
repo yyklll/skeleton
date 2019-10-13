@@ -1,3 +1,6 @@
+#[macro_use]
+extern crate log;
+
 use clap::AppSettings;
 use skeleton::utils::{client::Client, error::Result};
 use std::net::SocketAddr;
@@ -55,7 +58,7 @@ enum Command {
 fn main() {
   let opt = Opt::from_args();
   if let Err(e) = run(opt) {
-    eprintln!("{}", e);
+    error!("{}", e);
     exit(1);
   }
 }
@@ -70,7 +73,7 @@ fn run(opt: Opt) -> Result<()> {
       {
         println!("{}", value);
       } else {
-        eprintln!("error");
+        error!("error");
       }
     }
     Command::Command2 { arg1, arg2, addr } => {
@@ -81,7 +84,7 @@ fn run(opt: Opt) -> Result<()> {
       {
         println!("{}", value);
       } else {
-        eprintln!("error");
+        error!("error");
       }
     }
   }

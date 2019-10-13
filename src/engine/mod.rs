@@ -33,7 +33,7 @@ impl<P: ThreadPool> Engine for EngineAdd<P> {
     self.pool.spawn(move || {
       let res = Ok(arg1 + 1);
       if tx.send(res).is_err() {
-        eprintln!("Receiving end is dropped");
+        error!("Receiving end is dropped");
       }
     });
     Box::new(
@@ -47,7 +47,7 @@ impl<P: ThreadPool> Engine for EngineAdd<P> {
     self.pool.spawn(move || {
       let res = Ok(arg1 + arg2);
       if tx.send(res).is_err() {
-        eprintln!("Receiving end is dropped");
+        error!("Receiving end is dropped");
       }
     });
     Box::new(
